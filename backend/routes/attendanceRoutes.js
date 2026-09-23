@@ -5,7 +5,7 @@ const { authenticate, authorize } = require("../middleware/auth");
 
 router.use(authenticate);
 
-router.post("/", authorize("teacher", "admin"), recordAttendance);
+router.post("/", authorize("teacher"), recordAttendance);
 router.get("/:studentId", getAttendance);
 
 module.exports = router;

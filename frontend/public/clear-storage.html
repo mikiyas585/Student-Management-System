@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clear Storage - SMS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      max-width: 500px;
+    }
+    button {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s;
+    }
+    button:hover {
+      background: #059669;
+      transform: translateY(-2px);
+    }
+    .success {
+      background: rgba(16, 185, 129, 0.2);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .info {
+      background: rgba(59, 130, 246, 0.2);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔧 Clear Browser Storage</h1>
+    <p>Click the button below to clear all localStorage data and fix the JSON parse error.</p>
+    
+    <button onclick="clearStorage()">🗑️ Clear Storage</button>
+    <button onclick="goHome()">🏠 Go to Home</button>
+    
+    <div id="message"></div>
+    
+    <div class="info">
+      <strong>What does this do?</strong><br>
+      This clears corrupted data from your browser's localStorage that was causing the "undefined is not valid JSON" error.
+    </div>
+  </div>
+
+  <script>
+    function clearStorage() {
+      try {
+        localStorage.clear();
+        sessionStorage.clear();
+        
+        const messageDiv = document.getElementById('message');
+        messageDiv.innerHTML = `
+          <div class="success">
+            <h2>✅ Storage Cleared!</h2>
+            <p>The error has been fixed. You can now:</p>
+            <ol style="text-align: left;">
+              <li>Go to the home page</li>
+              <li>Login with: admin@school.com / password123</li>
+              <li>Use the system normally</li>
+            </ol>
+          </div>
+        `;
+      } catch (err) {
+        const messageDiv = document.getElementById('message');
+        messageDiv.innerHTML = `
+          <div style="background: rgba(239, 68, 68, 0.2); padding: 15px; border-radius: 8px; margin-top: 20px;">
+            <h2>❌ Error</h2>
+            <p>${err.message}</p>
+          </div>
+        `;
+      }
+    }
+    
+    function goHome() {
+      window.location.href = '/';
+    }
+    
+    // Auto-clear on page load
+    window.addEventListener('load', function() {
+      console.log('Checking localStorage...');
+      const user = localStorage.getItem('user');
+      if (user === 'undefined' || user === undefined) {
+        console.log('Found corrupted data, clearing...');
+        clearStorage();
+      }
+    });
+  </script>
+</body>
+</html>

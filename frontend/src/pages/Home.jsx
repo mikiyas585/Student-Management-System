@@ -248,8 +248,8 @@ export default function Home({ onOpenLogin, onOpenRegister }) {
             </div>
 
             <h1 className="hero-title">
-              Spark Curiosity With <br />
-              <span className="hero-title-gradient">EduVerse</span>
+              Smart & Simple <br />
+              <span className="hero-title-gradient">Student Management System</span>
             </h1>
 
             <div className="hero-typed-wrapper">
@@ -628,7 +628,7 @@ export default function Home({ onOpenLogin, onOpenRegister }) {
             Stories From Our <span>Campus Community</span>
           </h2>
           <p className="section-subtitle">
-            See how EduVerse transforms everyday school life for students,
+            See how Student Management System transforms everyday school life for students,
             educators, and engaged parents.
           </p>
         </div>
@@ -639,7 +639,7 @@ export default function Home({ onOpenLogin, onOpenRegister }) {
             <div>
               <div className="testimonial-stars">★★★★★</div>
               <p className="testimonial-quote">
-                "EduVerse completely changed how I look at homework and math.
+                "This system completely changed how I look at homework and math.
                 Watching my streak build up and unlocking badges for Python
                 challenges makes studying feel like my favorite strategy game!"
               </p>
@@ -662,7 +662,7 @@ export default function Home({ onOpenLogin, onOpenRegister }) {
               <p className="testimonial-quote">
                 "As a parent of two, keeping track of daily attendance, school fee
                 subscriptions, and teacher announcements used to be chaotic. With
-                EduVerse, everything is instantaneous and clean."
+                this system, everything is instantaneous and clean."
               </p>
             </div>
             <div className="testimonial-author">
@@ -772,7 +772,7 @@ export default function Home({ onOpenLogin, onOpenRegister }) {
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <span style={{ fontSize: 28 }}>🎓</span>
                 <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 24, color: "#fff" }}>
-                  EduVerse
+                  Student Management System
                 </span>
               </div>
               <p>
@@ -857,7 +857,7 @@ export default function Home({ onOpenLogin, onOpenRegister }) {
           {/* Footer Bottom Bar */}
           <div className="footer-bottom-bar">
             <div>
-              © {new Date().getFullYear()} EduVerse Management Inc. All rights reserved. Made with 💜 for schools.
+              © {new Date().getFullYear()} Student Management System Inc. All rights reserved.
             </div>
 
             <div className="footer-social-row">

@@ -31,7 +31,8 @@ export default function AuthModal({ isOpen, onClose, initialTab }) {
     setError("");
     try {
       var response = await api.post("/auth/login", { email: loginEmail, password: loginPassword });
-      login(response.data.token, response.data.user);
+      const { token, user } = response.data.data;  // Get from data.data
+      login(token, user);
       onClose();
       navigate("/dashboard");
     } catch (err) {
@@ -44,7 +45,8 @@ export default function AuthModal({ isOpen, onClose, initialTab }) {
     setError("");
     try {
       var response = await api.post("/auth/register", regForm);
-      login(response.data.token, response.data.user);
+      const { token, user } = response.data.data;  // Get from data.data
+      login(token, user);
       onClose();
       navigate("/dashboard");
     } catch (err) {
@@ -70,7 +72,7 @@ export default function AuthModal({ isOpen, onClose, initialTab }) {
         </button>
 
         <div className="auth-modal-title">
-          {activeTab === "login" ? "Welcome Back" : "Join EduVerse"}
+          {activeTab === "login" ? "Welcome Back" : "Join Student Management System"}
         </div>
         <div className="auth-modal-subtitle">
           {activeTab === "login"

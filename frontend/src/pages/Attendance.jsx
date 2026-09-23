@@ -4,25 +4,30 @@ import { useAuth } from "../context/AuthContext";
 
 export default function Attendance() {
   const { user } = useAuth();
-  const canRecord = user.role === "teacher" || user.role === "admin";
+  const canRecord = user.role === "teacher";
   const [students, setStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState("");
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [status, setStatus] = useState("present");
   const [records, setRecords] = useState([]);
+  const [studentSearch, setStudentSearch] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
   useEffect(function () {
     async function loadStudents() {
       try {
+        console.log("[Attendance] Loading students...");
         const response = await api.get("/students");
-        setStudents(response.data.students);
-        if (response.data.students.length > 0) {
-          setSelectedStudent(String(response.data.students[0].id));
+        console.log("[Attendance] Students loaded:", response.data);
+        const loadedStudents = response.data.data?.students || response.data.students || [];
+        setStudents(loadedStudents);
+        if (loadedStudents.length > 0) {
+          setSelectedStudent(String(loadedStudents[0].id));
         }
       } catch (err) {
-        setError(err.response?.data?.message || "Could not load students.");
+        console.error("[Attendance] Error loading students:", err);
+        setError(err.response?.data?.message || err.message || "Could not load students.");
       }
     }
     loadStudents();
@@ -31,16 +36,23 @@ export default function Attendance() {
   async function loadAttendance(studentId) {
     if (!studentId) return;
     try {
+      console.log("[Attendance] Loading attendance for student:", studentId);
       const response = await api.get("/attendance/" + studentId);
-      setRecords(response.data.attendance);
+      console.log("[Attendance] Attendance loaded:", response.data);
+      setRecords(response.data.attendance || []);
     } catch (err) {
-      setError(err.response?.data?.message || "Could not load attendance.");
+      console.error("[Attendance] Error loading attendance:", err);
+      setError(err.response?.data?.message || err.message || "Could not load attendance.");
     }
   }
 
   useEffect(function () {
     loadAttendance(selectedStudent);
   }, [selectedStudent]);
+
+  const visibleStudents = students.filter(function (student) {
+    return student.name.toLowerCase().includes(studentSearch.toLowerCase());
+  });
 
   async function handleRecord(e) {
     e.preventDefault();
@@ -58,15 +70,31 @@ export default function Attendance() {
     <div className="container">
       <div className="card">
         <h2>Attendance</h2>
+        {user.role === "admin" && (
+          <p style={{ fontSize: 13, color: "var(--accent)", marginTop: 4, marginBottom: 12 }}>
+            ℹ️ Read-Only Mode: Administrators can view attendance records, but only Teachers can record or edit daily attendance.
+          </p>
+        )}
         {error && <p className="error">{error}</p>}
         {message && <p className="success">{message}</p>}
 
+        <label>Search Student by Name</label>
+        <input
+          type="search"
+          value={studentSearch}
+          onChange={function (e) { setStudentSearch(e.target.value); }}
+          placeholder="Type a student name..."
+        />
+
         <label>Student</label>
         <select value={selectedStudent} onChange={function (e) { setSelectedStudent(e.target.value); }}>
-          {students.map(function (s) {
+          {visibleStudents.map(function (s) {
             return <option key={s.id} value={s.id}>{s.name}</option>;
           })}
         </select>
+        {students.length > 0 && visibleStudents.length === 0 && (
+          <p style={{ fontSize: 13, opacity: 0.7 }}>No student matches that name.</p>
+        )}
 
         {canRecord && (
           <form onSubmit={handleRecord}>

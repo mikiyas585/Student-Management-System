@@ -14,14 +14,20 @@ export default function Subscriptions() {
 
   async function loadAll() {
     try {
+      console.log("[Subscriptions] Loading subscriptions...");
       const [subsRes, recordsRes] = await Promise.all([
         api.get("/subscriptions"),
         api.get("/subscriptions/my"),
       ]);
-      setSubs(subsRes.data.subscriptions);
-      setRecords(recordsRes.data.records);
+      console.log("[Subscriptions] Data loaded:", { 
+        subscriptions: subsRes.data, 
+        records: recordsRes.data 
+      });
+      setSubs(subsRes.data.subscriptions || []);
+      setRecords(recordsRes.data.records || []);
     } catch (err) {
-      setError(err.response?.data?.message || "Could not load subscriptions.");
+      console.error("[Subscriptions] Error loading data:", err);
+      setError(err.response?.data?.message || err.message || "Could not load subscriptions.");
     }
   }
 
@@ -49,6 +55,18 @@ export default function Subscriptions() {
       loadAll();
     } catch (err) {
       setError(err.response?.data?.message || "Payment failed.");
+    }
+  }
+
+  async function handleDelete(id) {
+    if (!window.confirm("Are you sure you want to delete this subscription?")) return;
+    setError(""); setMessage("");
+    try {
+      await api.delete("/subscriptions/" + id);
+      setMessage("Subscription deleted successfully.");
+      loadAll();
+    } catch (err) {
+      setError(err.response?.data?.message || "Could not delete subscription.");
     }
   }
 
@@ -82,6 +100,15 @@ export default function Subscriptions() {
               <p style={{ margin: "4px 0" }}>{s.description}</p>
               {user.role === "student" && (
                 <button onClick={function () { handlePay(s.id); }}>Subscribe & Pay</button>
+              )}
+              {user.role === "admin" && (
+                <button 
+                  className="danger"
+                  onClick={function () { handleDelete(s.id); }}
+                  style={{ marginLeft: "10px" }}
+                >
+                  Delete
+                </button>
               )}
             </div>
           );

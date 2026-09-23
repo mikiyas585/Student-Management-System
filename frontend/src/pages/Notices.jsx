@@ -12,10 +12,13 @@ export default function Notices() {
 
   async function loadNotices() {
     try {
+      console.log("[Notices] Loading notices...");
       const response = await api.get("/notices");
-      setNotices(response.data.notices);
+      console.log("[Notices] Notices loaded:", response.data);
+      setNotices(response.data.notices || []);
     } catch (err) {
-      setError(err.response?.data?.message || "Could not load notices.");
+      console.error("[Notices] Error loading notices:", err);
+      setError(err.response?.data?.message || err.message || "Could not load notices.");
     }
   }
 

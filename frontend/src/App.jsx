@@ -13,6 +13,9 @@ import Students from "./pages/Students";
 import Notices from "./pages/Notices";
 import Subscriptions from "./pages/Subscriptions";
 import Attendance from "./pages/Attendance";
+import Grades from "./pages/Grades";
+import Teachers from "./pages/Teachers";
+import SystemTest from "./pages/SystemTest";
 
 function AppRoutes() {
   const { user } = useAuth();
@@ -65,8 +68,11 @@ function AppRoutes() {
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/students" element={<ProtectedRoute><Students /></ProtectedRoute>} />
         <Route path="/notices" element={<ProtectedRoute><Notices /></ProtectedRoute>} />
-        <Route path="/subscriptions" element={<ProtectedRoute><Subscriptions /></ProtectedRoute>} />
+        <Route path="/subscriptions" element={<ProtectedRoute roles={["admin", "teacher", "student"]}><Subscriptions /></ProtectedRoute>} />
         <Route path="/attendance" element={<ProtectedRoute><Attendance /></ProtectedRoute>} />
+        <Route path="/grades" element={<ProtectedRoute><Grades /></ProtectedRoute>} />
+        <Route path="/teachers" element={<ProtectedRoute roles={["admin"]}><Teachers /></ProtectedRoute>} />
+        <Route path="/system-test" element={<SystemTest />} />
 
         {/* Catch-all: go to hero if not logged in, dashboard if logged in */}
         <Route path="*" element={<Navigate to={user ? "/dashboard" : "/"} />} />

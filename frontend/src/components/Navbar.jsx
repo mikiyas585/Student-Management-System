@@ -16,7 +16,7 @@ export default function Navbar({ onOpenLogin, onOpenRegister }) {
       <div className="navbar" id="navbar">
         <Link to="/" className="navbar-brand">
           <span className="navbar-brand-icon">🎓</span>
-          EduVerse
+          Student Management System
         </Link>
         <div className="navbar-right">
           <button
@@ -44,14 +44,17 @@ export default function Navbar({ onOpenLogin, onOpenRegister }) {
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <Link to="/dashboard" className="navbar-brand" style={{ marginRight: 16 }}>
           <span className="navbar-brand-icon">🎓</span>
-          EduVerse
+          Student Management System
         </Link>
         <div className="navbar-links">
           <Link to="/dashboard" className={"nav-link" + isActive("/dashboard")}>Dashboard</Link>
           <Link to="/students" className={"nav-link" + isActive("/students")}>Students</Link>
           <Link to="/notices" className={"nav-link" + isActive("/notices")}>Notices</Link>
-          <Link to="/subscriptions" className={"nav-link" + isActive("/subscriptions")}>Subscriptions</Link>
+          {user?.role !== "parent" && (
+            <Link to="/subscriptions" className={"nav-link" + isActive("/subscriptions")}>Subscriptions</Link>
+          )}
           <Link to="/attendance" className={"nav-link" + isActive("/attendance")}>Attendance</Link>
+          <Link to="/grades" className={"nav-link" + isActive("/grades")}>Grades</Link>
         </div>
       </div>
       <div className="navbar-right">

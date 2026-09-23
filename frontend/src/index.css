@@ -1,5 +1,5 @@
 /* ============================================================
-   EduVerse — Premium Dark Glassmorphism Design System
+   Student Management System — Clean Design System
    ============================================================ */
 
 /* --- CSS Variables / Design Tokens --- */
@@ -1961,3 +1961,832 @@ tbody tr:hover {
   }
 }
 
+/* ============================================================
+   ENHANCED ANIMATIONS & VISUAL EFFECTS
+   ============================================================ */
+
+/* Advanced Particle Effects */
+.particle-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.6);
+  animation: particleFloat 8s linear infinite;
+  filter: blur(1px);
+}
+
+.particle:nth-child(2n) {
+  background: rgba(6, 214, 160, 0.6);
+  width: 3px;
+  height: 3px;
+}
+
+.particle:nth-child(3n) {
+  background: rgba(255, 112, 86, 0.6);
+  width: 5px;
+  height: 5px;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(calc(100px * var(--direction, 1))) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Enhanced Hero Floating Animation */
+.hero-shape-enhanced {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  filter: blur(80px);
+  animation: enhancedFloat 12s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.hero-shape-enhanced-1 {
+  width: 600px; height: 600px;
+  background: linear-gradient(135deg, var(--accent), var(--violet));
+  top: -15%; left: -10%;
+  animation-delay: 0s;
+}
+
+.hero-shape-enhanced-2 {
+  width: 500px; height: 500px;
+  background: linear-gradient(135deg, var(--cyan), var(--emerald));
+  bottom: -15%; right: -10%;
+  animation-delay: -4s;
+}
+
+.hero-shape-enhanced-3 {
+  width: 400px; height: 400px;
+  background: linear-gradient(135deg, var(--rose), var(--amber));
+  top: 60%; left: 80%;
+  animation-delay: -8s;
+}
+
+@keyframes enhancedFloat {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 0.1;
+  }
+  25% { 
+    transform: translate(40px, -40px) scale(1.1) rotate(90deg);
+    opacity: 0.15;
+  }
+  50% { 
+    transform: translate(-30px, 30px) scale(0.95) rotate(180deg);
+    opacity: 0.08;
+  }
+  75% { 
+    transform: translate(20px, 20px) scale(1.05) rotate(270deg);
+    opacity: 0.12;
+  }
+}
+
+/* Scroll-triggered Reveal Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.reveal-on-scroll.delay-100 { transition-delay: 0.1s; }
+.reveal-on-scroll.delay-200 { transition-delay: 0.2s; }
+.reveal-on-scroll.delay-300 { transition-delay: 0.3s; }
+.reveal-on-scroll.delay-400 { transition-delay: 0.4s; }
+
+/* Enhanced Clay Card Hover Effects */
+.clay-card-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+.clay-card-enhanced::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  transition: transform 0.6s ease;
+  opacity: 0;
+}
+
+.clay-card-enhanced:hover::before {
+  animation: shine 1.5s ease-out;
+  opacity: 1;
+}
+
+@keyframes shine {
+  0% {
+    transform: rotate(45deg) translateX(-100%);
+  }
+  100% {
+    transform: rotate(45deg) translateX(100%);
+  }
+}
+
+/* Enhanced Typography Animations */
+.text-gradient-animated {
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    var(--cyan) 25%,
+    var(--violet) 50%,
+    var(--emerald) 75%,
+    var(--accent) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 3s linear infinite;
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Enhanced Button Pulse Animation */
+.btn-pulse {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-pulse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-pulse:hover::after {
+  transform: translateX(100%);
+}
+
+/* Advanced Loading Animations */
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--accent);
+  animation: spin 1s linear infinite;
+  position: relative;
+}
+
+.loading-spinner::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  border-top-color: var(--cyan);
+  animation: spin 1.5s linear infinite reverse;
+}
+
+.loading-spinner::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  border-top-color: var(--violet);
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced Progress Bar Animation */
+.xp-track-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+.xp-track-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: progressShine 2s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes progressShine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Enhanced Card Tilt Effect */
+.card-tilt-container {
+  perspective: 1000px;
+}
+
+.card-tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+/* Enhanced Parallax Scrolling */
+.parallax-layer {
+  position: absolute;
+  will-change: transform;
+}
+
+/* Enhanced Hover Scale with Depth */
+.hover-scale-depth {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+}
+
+.hover-scale-depth:hover {
+  transform: translateY(-10px) scale(1.05) rotateX(5deg) rotateY(5deg);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.6),
+    0 0 40px var(--accent-glow);
+}
+
+/* Enhanced Glow Effects */
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 40px var(--accent-glow);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.glow-effect:hover::after {
+  opacity: 1;
+}
+
+/* Enhanced Typed Cursor Animation */
+.typed-cursor-enhanced {
+  animation: typedBlink 0.7s infinite;
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan-glow);
+}
+
+@keyframes typedBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Enhanced Floating Emoji Animation */
+.floating-emoji-enhanced {
+  animation: floatEnhanced 6s ease-in-out infinite;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes floatEnhanced {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(15px, -20px) rotate(15deg) scale(1.1);
+  }
+  50% {
+    transform: translate(-10px, 10px) rotate(-10deg) scale(0.95);
+  }
+  75% {
+    transform: translate(20px, 15px) rotate(20deg) scale(1.05);
+  }
+}
+
+/* Enhanced Badge Animation */
+.badge-bounce {
+  animation: badgeBounce 2s ease-in-out infinite;
+}
+
+@keyframes badgeBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Enhanced Section Transition */
+.section-transition {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-transition.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced Input Focus Animation */
+.input-focus-enhanced:focus {
+  animation: inputFocusGlow 0.3s ease-out;
+}
+
+@keyframes inputFocusGlow {
+  0% {
+    box-shadow: 0 0 0 0 var(--accent-glow);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+}
+
+/* Enhanced Tooltip Animation */
+.tooltip-enhanced {
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.tooltip-enhanced.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Enhanced Modal Animation */
+.modal-enhanced {
+  animation: modalEntrance 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes modalEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9) rotateX(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0);
+  }
+}
+/* ============================================================
+   TEACHER MANAGEMENT STYLES
+   ============================================================ */
+
+/* Tabs Navigation */
+.tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 4px;
+  margin-bottom: 24px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tabs button:hover {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+.tabs button.active {
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.1);
+  border-bottom: 2px solid var(--accent);
+}
+
+.tabs button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+}
+
+/* Teacher Management Cards */
+.teacher-card {
+  background: var(--glass);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: all var(--transition-smooth);
+}
+
+.teacher-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-md);
+}
+
+.teacher-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.teacher-card-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+/* Assignment Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-active {
+  background: rgba(6, 214, 160, 0.15);
+  color: #06d6a0;
+  border: 1px solid rgba(6, 214, 160, 0.3);
+}
+
+.status-inactive {
+  background: rgba(251, 113, 133, 0.15);
+  color: #fb7185;
+  border: 1px solid rgba(251, 113, 133, 0.3);
+}
+
+.status-pending {
+  background: rgba(255, 183, 3, 0.15);
+  color: #ffb703;
+  border: 1px solid rgba(255, 183, 3, 0.3);
+}
+
+/* Teacher Info Grid */
+.teacher-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Assignment Grid */
+.assignment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.assignment-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  padding: 16px;
+  transition: all var(--transition-fast);
+}
+
+.assignment-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.assignment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.assignment-subject {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.assignment-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.assignment-detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.assignment-detail svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.7;
+}
+
+/* Student Link Grid */
+.student-link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.student-link-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all var(--transition-fast);
+}
+
+.student-link-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--cyan);
+}
+
+.student-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--violet));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+  font-size: 14px;
+}
+
+.student-info {
+  flex: 1;
+}
+
+.student-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.student-grade {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Form Grid Layout */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .form-grid-2,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .teacher-info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .assignment-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tabs {
+    flex-direction: column;
+  }
+  
+  .tabs button {
+    border-radius: var(--radius-sm);
+    justify-content: center;
+  }
+  
+  .tabs button.active {
+    border-bottom: none;
+    border-left: 2px solid var(--accent);
+  }
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.empty-state p {
+  margin-bottom: 20px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Loading State Enhancement */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.loading-state .loading-spinner {
+  margin-bottom: 20px;
+}
+
+.loading-state p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* Action Buttons Group */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.action-buttons button {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+/* Data Table Improvements */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+table th {
+  text-align: left;
+  padding: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+table td {
+  padding: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+table tbody tr {
+  transition: background var(--transition-fast);
+}
+
+table tbody tr:hover {
+  background: var(--surface);
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  table th,
+  table td {
+    min-width: 120px;
+  }
+}

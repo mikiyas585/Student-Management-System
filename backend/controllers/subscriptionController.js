@@ -124,10 +124,23 @@ async function getMySubscriptions(req, res) {
   }
 }
 
+// DELETE /api/subscriptions/:id (admin only)
+async function deleteSubscription(req, res) {
+  try {
+    const { id } = req.params;
+    await pool.execute("DELETE FROM subscriptions WHERE id = ?", [id]);
+    res.json({ message: "Subscription deleted." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Could not delete subscription.", error: error.message });
+  }
+}
+
 module.exports = {
   getSubscriptions,
   createSubscription,
   closeSubscription,
   paySubscription,
   getMySubscriptions,
+  deleteSubscription,
 };
